@@ -1,0 +1,15 @@
+{
+	"name": "decohort",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8bdc1e9c-dab7-49ca-95a0-dfdf74b9e688",
+		"tenantId": "90fe733d-6c15-4300-ba53-c8cfe381be10"
+	}
+}
