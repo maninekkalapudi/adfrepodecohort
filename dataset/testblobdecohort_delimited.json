@@ -1,0 +1,22 @@
+{
+	"name": "testblobdecohort_delimited",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_testblobdecohort",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "testcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
