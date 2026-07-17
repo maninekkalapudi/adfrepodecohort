@@ -1,0 +1,83 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_testblobdecohort",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "testcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0",
+				"type": "String"
+			},
+			{
+				"name": "Rank",
+				"type": "String"
+			},
+			{
+				"name": "Racer",
+				"type": "String"
+			},
+			{
+				"name": "Text_Bests",
+				"type": "String"
+			},
+			{
+				"name": "Races",
+				"type": "String"
+			},
+			{
+				"name": "Texts",
+				"type": "String"
+			},
+			{
+				"name": "Career",
+				"type": "String"
+			},
+			{
+				"name": "Best_10",
+				"type": "String"
+			},
+			{
+				"name": "Best_Race",
+				"type": "String"
+			},
+			{
+				"name": "Points",
+				"type": "String"
+			},
+			{
+				"name": "Wins",
+				"type": "String"
+			},
+			{
+				"name": "Win_%",
+				"type": "String"
+			},
+			{
+				"name": "Marathon",
+				"type": "String"
+			},
+			{
+				"name": "Last_Race",
+				"type": "String"
+			},
+			{
+				"name": "Variation",
+				"type": "String"
+			}
+		]
+	}
+}

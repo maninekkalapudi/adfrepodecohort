@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "testblobdecohort_delimited",
+						"referenceName": "DelimitedText1",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
