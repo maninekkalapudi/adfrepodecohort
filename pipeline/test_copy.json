@@ -46,7 +46,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output",
+						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -78,7 +78,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "@concat('truncate table ', replace(item(), '.csv', ''))",
+										"value": "@concat('truncate table ', replace(item().name, '.csv', ''))",
 										"type": "Expression"
 									},
 									"writeBehavior": "insert",
@@ -102,7 +102,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_name": {
-											"value": "@item()",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
@@ -114,7 +114,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"table_name": {
-											"value": "@replace(item(),'.csv','')",
+											"value": "@replace(item().name,'.csv','')",
 											"type": "Expression"
 										}
 									}
