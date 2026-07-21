@@ -1,0 +1,21 @@
+{
+	"name": "ls_kaggle",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://www.kaggle.com/api/v1",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Basic",
+			"userName": "maninekkalapudi",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "kagglepasswd"
+			}
+		}
+	}
+}
