@@ -78,7 +78,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "@concat('truncate table ', replace(item().name, '.csv', ''))",
+										"value": "@concat('truncate table if exists', replace(item().name, '.csv', ''))",
 										"type": "Expression"
 									},
 									"writeBehavior": "insert",
