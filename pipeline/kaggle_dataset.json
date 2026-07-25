@@ -29,14 +29,9 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false
@@ -49,12 +44,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "testblobdecohort_delimited_copy1",
-						"type": "DatasetReference",
-						"parameters": {
-							"file_name": "sales_analysis.csv",
-							"folder_name": "sales_analysis"
-						}
+						"referenceName": "b_testblobdecohort",
+						"type": "DatasetReference"
 					}
 				]
 			}

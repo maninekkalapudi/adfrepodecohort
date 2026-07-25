@@ -1,0 +1,33 @@
+{
+	"name": "b_testblobdecohort",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_testblobdecohort",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folder_name": {
+				"type": "string"
+			},
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(dataset().file_name,utcNow())",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('kaggledatasets/', dataset().folder_name)",
+					"type": "Expression"
+				},
+				"container": "testcontainer"
+			}
+		}
+	}
+}
