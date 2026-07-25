@@ -19,7 +19,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat(dataset().file_name,utcNow())",
+					"value": "@concat(dataset().file_name,'_',formatDateTime(utcNow(), 'yyyyMMdd_HHmmss'), '.zip')",
 					"type": "Expression"
 				},
 				"folderPath": {
