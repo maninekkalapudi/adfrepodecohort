@@ -11,10 +11,6 @@
 			"location": {
 				"type": "HttpServerLocation",
 				"relativeUrl": "datasets/download/saiparitala/sales-analysis"
-			},
-			"compression": {
-				"type": "ZipDeflate",
-				"level": "Fastest"
 			}
 		}
 	}
