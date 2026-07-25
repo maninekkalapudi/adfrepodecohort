@@ -45,7 +45,17 @@
 				"outputs": [
 					{
 						"referenceName": "b_testblobdecohort",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"folder_name": {
+								"value": "sales_analysis",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "sales_analysis",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
