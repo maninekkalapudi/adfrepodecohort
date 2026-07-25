@@ -1,0 +1,21 @@
+{
+	"name": "kaggle_http_api",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_kaggle_http",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "datasets/download/saiparitala/sales-analysis"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Fastest"
+			}
+		}
+	}
+}
