@@ -1,0 +1,24 @@
+{
+	"name": "landingzoneParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_testblobdecohort",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "chinook"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
