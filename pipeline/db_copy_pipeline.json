@@ -101,7 +101,10 @@
 									"referenceName": "landingzoneParquet",
 									"type": "DatasetReference",
 									"parameters": {
-										"file_name": "Customer.parquet"
+										"file_name": {
+											"value": "@concat(item(), '_', formatDateTime(utcNow(),'YYYY_MM_DD_HH_MM_SS'))",
+											"type": "Expression"
+										}
 									}
 								}
 							]
