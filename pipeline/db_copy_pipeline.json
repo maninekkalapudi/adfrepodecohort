@@ -103,7 +103,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_name": {
-											"value": "@concat(item().table_name, '_', formatDateTime(utcNow(),'yyyyMMddHHMMss'), '.parquet')",
+											"value": "@concat(item().table_name, '_', formatDateTime(utcNow(),'yyyyMMddHHMMss'), '.snappy.parquet')",
 											"type": "Expression"
 										}
 									}
