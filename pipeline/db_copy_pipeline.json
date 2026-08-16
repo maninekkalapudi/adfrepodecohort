@@ -50,7 +50,14 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -107,17 +114,69 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_name": {
-											"value": "@concat(item().table_name, '_', formatDateTime(utcNow(),'yyyyMMddHHMMss'), '.snappy.parquet')",
+											"value": "@variables('file_name')",
 											"type": "Expression"
 										}
 									}
 								}
 							]
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "file_name",
+								"value": "@concat(item().table_name, '_', formatDateTime(utcNow(),'yyyyMMddHHMMss'), '.snappy.parquet')"
+							}
+						},
+						{
+							"name": "Notebook1",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/manikantanekkalapudi@live.com/chinook_dwh/test_raw_files_read",
+								"baseParameters": {
+									"file_name": {
+										"value": "@variables('file_name')",
+										"type": "Expression"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureDatabricks1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
 			}
 		],
+		"variables": {
+			"file_name": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
