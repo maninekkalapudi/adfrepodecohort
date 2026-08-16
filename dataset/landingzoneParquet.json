@@ -21,7 +21,7 @@
 				},
 				"container": "chinook"
 			},
-			"compressionCodec": "snappy"
+			"compressionCodec": null
 		},
 		"schema": []
 	}
