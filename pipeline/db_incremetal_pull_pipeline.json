@@ -1,5 +1,5 @@
 {
-	"name": "db_copy_pipeline",
+	"name": "db_incremetal_pull_pipeline",
 	"properties": {
 		"activities": [
 			{
