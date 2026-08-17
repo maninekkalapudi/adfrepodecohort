@@ -132,7 +132,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "file_name",
-								"value": "@concat(item().table_name, '_', formatDateTime(utcNow(),'yyyyMMddHHMMss'), '.snappy.parquet')"
+								"value": {
+									"value": "@concat(item().table_name, '_', formatDateTime(utcNow(),'yyyyMMddHHMMss'), '.snappy.parquet')",
+									"type": "Expression"
+								}
 							}
 						},
 						{
@@ -166,6 +169,42 @@
 							"linkedServiceName": {
 								"referenceName": "AzureDatabricks1",
 								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Lookup2",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"dataset": {
+									"referenceName": "DelimitedText2",
+									"type": "DatasetReference",
+									"parameters": {
+										"folder_name": {
+											"value": "@item().table_name",
+											"type": "Expression"
+										}
+									}
+								}
 							}
 						}
 					]
