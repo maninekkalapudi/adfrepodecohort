@@ -313,6 +313,27 @@
 									}
 								]
 							}
+						},
+						{
+							"name": "SQL_QUERY",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set parquet filename",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "sql_query",
+								"value": "@concat('SELECT * FROM dbo.',item().table_name,' WHERE lastmodieddate >= ''',variables('datapull_timestamp'),'''')"
+							}
 						}
 					]
 				}
@@ -323,6 +344,9 @@
 				"type": "String"
 			},
 			"datapull_timestamp": {
+				"type": "String"
+			},
+			"sql_query": {
 				"type": "String"
 			}
 		},
