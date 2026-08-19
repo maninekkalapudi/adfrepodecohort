@@ -221,8 +221,7 @@
 										"folder_name": {
 											"value": "@item().table_name",
 											"type": "Expression"
-										},
-										"file_name": "@concat(item().table_name,'.txt')"
+										}
 									}
 								}
 							}
@@ -246,10 +245,6 @@
 									"parameters": {
 										"folder_name": {
 											"value": "@item().table_name",
-											"type": "Expression"
-										},
-										"file_name": {
-											"value": "@concat(item().table_name,'.txt')",
 											"type": "Expression"
 										}
 									}
