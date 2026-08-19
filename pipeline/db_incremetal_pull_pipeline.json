@@ -165,7 +165,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"notebookPath": "/Users/manikantanekkalapudi@live.com/chinook_dwh/test_raw_files_read",
+								"notebookPath": "/Users/manikantanekkalapudi@live.com/chinook_dwh/raw_layer_load",
 								"baseParameters": {
 									"file_name": {
 										"value": "@variables('file_name')",
