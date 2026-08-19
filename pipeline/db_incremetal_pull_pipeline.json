@@ -70,7 +70,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "@concat(\r\n    'SELECT * FROM dbo.',\r\n    item().table_name,\r\n    ' WHERE lastmodieddate >= ''',\r\n    variables('datapull_timestamp'),\r\n    ''''\r\n)",
+										"value": "@concat('SELECT * FROM dbo.',item().table_name,' WHERE lastmodieddate >= ''',variables('datapull_timestamp'),'''')",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
