@@ -56,18 +56,6 @@
 									"dependencyConditions": [
 										"Succeeded"
 									]
-								},
-								{
-									"activity": "Set default timestamp",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								},
-								{
-									"activity": "Set incremetal timestamp",
-									"dependencyConditions": [
-										"Succeeded"
-									]
 								}
 							],
 							"policy": {
@@ -136,7 +124,14 @@
 						{
 							"name": "Set parquet filename",
 							"type": "SetVariable",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "If Condition1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"secureOutput": false,
 								"secureInput": false
@@ -184,49 +179,6 @@
 							}
 						},
 						{
-							"name": "Get timestamp value",
-							"type": "Lookup",
-							"dependsOn": [
-								{
-									"activity": "Check Raw Layer Timestamp file",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "DelimitedTextSource",
-									"storeSettings": {
-										"type": "AzureBlobStorageReadSettings",
-										"recursive": true,
-										"enablePartitionDiscovery": false
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
-									}
-								},
-								"dataset": {
-									"referenceName": "DelimitedText2",
-									"type": "DatasetReference",
-									"parameters": {
-										"folder_name": {
-											"value": "@item().table_name",
-											"type": "Expression"
-										}
-									}
-								}
-							}
-						},
-						{
 							"name": "Check Raw Layer Timestamp file",
 							"type": "GetMetadata",
 							"dependsOn": [],
@@ -263,51 +215,103 @@
 							}
 						},
 						{
-							"name": "Set default timestamp",
-							"type": "SetVariable",
+							"name": "If Condition1",
+							"type": "IfCondition",
 							"dependsOn": [
 								{
 									"activity": "Check Raw Layer Timestamp file",
-									"dependencyConditions": [
-										"Failed"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "datapull_timestamp",
-								"value": {
-									"value": "'1900-01-01 00:00:00'",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Set incremetal timestamp",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Get timestamp value",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								}
 							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "datapull_timestamp",
-								"value": {
-									"value": "@activity('Get timestamp value').output.firstRow[0]",
+								"expression": {
+									"value": "@equals(activity('Check Raw Layer Timestamp file').output.exists, true)",
 									"type": "Expression"
-								}
+								},
+								"ifFalseActivities": [
+									{
+										"name": "Set default timestamp",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "datapull_timestamp",
+											"value": {
+												"value": "'1900-01-01 00:00:00'",
+												"type": "Expression"
+											}
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "Get timestamp value",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobStorageReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"dataset": {
+												"referenceName": "DelimitedText2",
+												"type": "DatasetReference",
+												"parameters": {
+													"folder_name": {
+														"value": "@item().table_name",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									},
+									{
+										"name": "Set incremetal timestamp",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Get timestamp value",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "datapull_timestamp",
+											"value": {
+												"value": "@activity('Get timestamp value').output.firstRow[0]",
+												"type": "Expression"
+											}
+										}
+									}
+								]
 							}
 						}
 					]
