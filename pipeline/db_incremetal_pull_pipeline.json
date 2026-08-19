@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
+				"name": "Get table List from database",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -33,7 +33,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Get table List from database",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -48,23 +48,23 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Copy data1",
+							"name": "Copy db tables",
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "Set variable1",
+									"activity": "Set parquet filename",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Set variable2",
+									"activity": "Set default timestamp",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Set variable3",
+									"activity": "Set incremetal timestamp",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -134,7 +134,7 @@
 							]
 						},
 						{
-							"name": "Set variable1",
+							"name": "Set parquet filename",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
@@ -151,11 +151,11 @@
 							}
 						},
 						{
-							"name": "Notebook1",
+							"name": "load raw layer data",
 							"type": "DatabricksNotebook",
 							"dependsOn": [
 								{
-									"activity": "Copy data1",
+									"activity": "Copy db tables",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -184,11 +184,11 @@
 							}
 						},
 						{
-							"name": "Lookup2",
+							"name": "Get timestamp value",
 							"type": "Lookup",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata1",
+									"activity": "Check Raw Layer Timestamp file",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -227,7 +227,7 @@
 							}
 						},
 						{
-							"name": "Get Metadata1",
+							"name": "Check Raw Layer Timestamp file",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
@@ -249,7 +249,9 @@
 										}
 									}
 								},
-								"fieldList": [],
+								"fieldList": [
+									"exists"
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
@@ -261,11 +263,11 @@
 							}
 						},
 						{
-							"name": "Set variable2",
+							"name": "Set default timestamp",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata1",
+									"activity": "Check Raw Layer Timestamp file",
 									"dependencyConditions": [
 										"Failed"
 									]
@@ -285,11 +287,11 @@
 							}
 						},
 						{
-							"name": "Set variable3",
+							"name": "Set incremetal timestamp",
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "Lookup2",
+									"activity": "Get timestamp value",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -303,7 +305,7 @@
 							"typeProperties": {
 								"variableName": "datapull_timestamp",
 								"value": {
-									"value": "@activity('Lookup2').output.firstRow[0]",
+									"value": "@activity('Get timestamp value').output.firstRow[0]",
 									"type": "Expression"
 								}
 							}
