@@ -70,7 +70,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "@concat('SELECT * FROM dbo.',item().table_name,' WHERE lastmodieddate >= ''',variables('datapull_timestamp'),'''')",
+										"value": "@concat(\n    'SELECT * FROM dbo.',\n    item().table_name,\n    ' WHERE LastModifiedDate >= ''',\n    replace(variables('datapull_timestamp'), '''', ''),\n    ''''\n)",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -332,7 +332,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "sql_query",
-								"value": "@concat('SELECT * FROM dbo.',item().table_name,' WHERE lastmodieddate >= ''',variables('datapull_timestamp'),'''')"
+								"value": {
+									"value": "@concat(\n    'SELECT * FROM dbo.',\n    item().table_name,\n    ' WHERE LastModifiedDate >= ''',\n    replace(variables('datapull_timestamp'), '''', ''),\n    ''''\n)",
+									"type": "Expression"
+								}
 							}
 						}
 					]
