@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select table_name from(\n    select schema_name(schema_id) as schema_name, name as table_name\n    from sys.tables\n    ) a\nwhere schema_name = 'dbo'\norder by schema_name, table_name;",
+						"sqlReaderQuery": "select table_name from(\n    select schema_name(schema_id) as schema_name, name as table_name\n    from sys.tables\n    ) a\nwhere schema_name = 'dbo' and table_name = 'Album'\norder by schema_name, table_name;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -257,6 +257,7 @@
 								"fieldList": [],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
