@@ -1,0 +1,12 @@
+{
+	"name": "AzureSynapseArtifacts1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSynapseArtifacts",
+		"typeProperties": {
+			"endpoint": "https://decohortsynapse.dev.azuresynapse.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/15099ded-f698-4f7d-9bc7-643193b79dc9/resourceGroups/rg-data-engineering-examples/providers/Microsoft.Synapse/workspaces/decohortsynapse"
+		}
+	}
+}
