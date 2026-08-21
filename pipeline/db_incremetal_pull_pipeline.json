@@ -358,7 +358,10 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"notebookPath": "/Users/manikantanekkalapudi@live.com/chinook_dwh/chinook_scd_type_2"
+								"notebookPath": "/Users/manikantanekkalapudi@live.com/chinook_dwh/chinook_scd_type_2",
+								"baseParameters": {
+									"file_name": "@variables('file_name')"
+								}
 							},
 							"linkedServiceName": {
 								"referenceName": "AzureDatabricks1",
